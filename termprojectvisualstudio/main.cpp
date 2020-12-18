@@ -8,75 +8,119 @@ using namespace std;
 class termproject
 {
 
-private:
-    bool error;
-    DoublyLinkedList <string>** listoflist;
+public:
+
+    DoublyLinkedList <string> dll;
+    DLLNode <string> DLLNode;
     int arraysize;
-    int* CheckList;
-    void TurnDefault(void)
-    {
-        for (int i = 0; i < arraysize + 1; i++)
-        {
-            CheckList[i] = -1;
-        }
-    }
-public:
-    void openfilename();
-    void savefilename();
-    void insert();
-    void del();
-    void move();
-    void replace();
-    void next();
-    void prev();
-    void undo();
 
 
+    void openfilename(string filename) {
 
-public:
-    termproject(string filename)
-    {
-
+        string line;
         ifstream file;
         file.open(filename.c_str());
-        file >> arraysize;
+
         if (file.is_open() == false)
         {
             cout << "Couldn't open the file" << endl;
-            error = true;
             return;
         }
-        error = false;
-        CheckList = new int[arraysize + 1];
-        TurnDefault();
-        listoflist = new DoublyLinkedList <string> *[arraysize];
-        for (int i = 0; i < arraysize; i++)
-        {
-            listoflist[i] = new DoublyLinkedList <string>;
+  
+        while (getline(file, line)) {
+            cout << line;
+            dll.addToDLLTail(line);
+
         }
-
-        //int from,to;
-        //int i = 0;
-        //while(file.eof() == false)
-        //{
-            //file>>from;
-            //file>>to;
-
-
-            //listoflist[from-1]->addToDLLTail(to);
-        //}
     }
+    void savefilename() {
+
+        ofstream SaveFile("Text.txt", std::ios::out | std::ios::app);
+
+    }
+
+    void insert(int n, string text) {
+
+        if(dll.isEmpty())
+        {
+            dll.addToDLLHead(text);
+        }
+        else {
+            //DLLNode newnode = new DLLNode();
+            //newnode.info = text;
+            //newnode.n = n;
+
+        }
+    }
+
+    void del() {
+
+    }
+    void move() {
+    }
+
+    void replace() {
+    }
+
+    void next() {
+
+    }
+    void prev() {
+    }
+
+    void undo() {
+
+    }
+
+
+
+
 };
+
+
 int main(void)
 {
 
-    string filename;
-    int element;
-    cout << "Enter filename " << endl;
-    getline(cin, filename);
-    termproject file(filename);
+    termproject termproject;
+    string text;
+    int command;
+    int n;
+    do {
+        cout << "********************************************************\n";
+        cout << "Written By: Baturay Caglasin\n";
+        cout << "********************************************************\n";
+        cout << "Welcome to the project. Please type your command: :\n";
+        cout << "********************************************************\n";
+        cout << " 1-Open your file \n";
+        cout << " 2.Save your file \n";
+        cout << " 3.Insert a text to your given line \n";
+        cout << " 4.Delete a text from your given line  \n";
+        cout << " 5-Move your line position \n";
+        cout << " 6-Replace a line \n";
+        cout << " 7-Next Operation \n";
+        cout << " 8-Prev Operation \n";
+        cout << " 9-Undo Operation" << endl;
+        
+
+        cin >> command;
+
+        if (command == 1)
+        {
+            termproject.openfilename("Text.txt");
+        }
+        if (command == 2)
+        {
+            termproject.savefilename();
+        }
+        if (command == 3)
+        {
+            cout << "Where do you want to insert your text? Type a number." << endl;
+            cin >> n;
+            cout << "What do you want to insert? Write your text." << endl;
+            cin >> text; //tek bir kelime nasýl alýnýyor bak
+            termproject.insert(n, text);
+        }
 
 
+    } while (true);
 }
-
-
