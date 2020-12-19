@@ -28,7 +28,7 @@ public:
         }
   
         while (getline(file, line)) {
-            cout << line;
+            cout << line <<endl;
             dll.addToDLLTail(line);
 
         }
@@ -39,22 +39,28 @@ public:
 
     }
 
-    void insert(int n, string text) {
+    void insert(int index, string text) {
 
-        if(dll.isEmpty())
+        if (dll.isEmpty()) 
         {
-            dll.addToDLLHead(text);
+            dll.addToDLLHead(text); //Corner case: eðer text dosyasý boþ ise ilk row'a bu text'i ekleyecek.
+        }
+        if (index == 1) {
+            dll.addToDLLHead(text); //Corner case: eðer ki kullanýcý ilk row'u seçmiþse bu text head'e eklensin.
         }
         else {
-            //DLLNode newnode = new DLLNode();
-            //newnode.info = text;
-            //newnode.n = n;
-
+            dll.addToBetween(index,text); //Eðer ki kullanýcý index row'unu seçerse bu index row'una bu text eklenir.
         }
     }
 
-    void del() {
-
+    void del(int index) {
+        if (dll.isEmpty())
+        {
+            cout<<"You cannot do that action. Please close the program.";
+        }
+        else {
+            
+        }
     }
     void move() {
     }
@@ -84,7 +90,7 @@ int main(void)
     termproject termproject;
     string text;
     int command;
-    int n;
+    int index;
     do {
         cout << "********************************************************\n";
         cout << "Written By: Baturay Caglasin\n";
@@ -100,7 +106,7 @@ int main(void)
         cout << " 7-Next Operation \n";
         cout << " 8-Prev Operation \n";
         cout << " 9-Undo Operation" << endl;
-        
+
 
         cin >> command;
 
@@ -115,12 +121,13 @@ int main(void)
         if (command == 3)
         {
             cout << "Where do you want to insert your text? Type a number." << endl;
-            cin >> n;
+            cin >> index;
             cout << "What do you want to insert? Write your text." << endl;
-            cin >> text; //tek bir kelime nasýl alýnýyor bak
-            termproject.insert(n, text);
+            cin >> text; 
+            termproject.insert(index, text);
+
         }
-
-
-    } while (true);
+       
+    }
+    while (true);
 }

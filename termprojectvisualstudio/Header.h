@@ -47,9 +47,11 @@ public:
         head = tail = 0;
     }
     void addToDLLHead(const T&);
+    void addToBetween(int,const T&);
     T deleteFromDLLHead();
     T& firstEl();
     T* find(const T&) const;
+    T  get_size();
 protected:
     DLLNode<T>* head, * tail;
     friend ostream& operator<<(ostream& out, const DoublyLinkedList<T>& dll)
@@ -82,6 +84,31 @@ void DoublyLinkedList<T>::addToDLLTail(const T& el)
     else head = tail = new DLLNode<T>(el);
 }
 
+//*******************************************************************************//
+template<class T>
+void DoublyLinkedList<T>::addToBetween(int index,const T& el)
+{
+    DLLNode<T>** newptr = new DLLNode<T>;
+    int size = 0;
+    newptr->info = el;
+    if (index < 1 || index > size + 1){
+        cout << "Invalid position." << endl;
+    }
+    else {
+        *prev = find(index - 1);
+        newptr->next = prev->next;
+        prev->next = newptr;
+    }
+}
+//*******************************************************************************//
+template<class T>
+T DoublyLinkedList<T>::get_size(){
+    int size = 0;
+    for (DLLNode* tmp = head; tmp != 0; tmp = tmp->next)
+        size++;
+
+    return size;
+}
 template<class T>
 T DoublyLinkedList<T>::deleteFromDLLHead()
 {
