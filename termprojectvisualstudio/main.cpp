@@ -4,6 +4,7 @@
 #include <stack>
 #include "Header.h"
 
+
 using namespace std;
 class termproject
 {
@@ -34,9 +35,8 @@ public:
         }
     }
     void savefilename() {
-
-        ofstream SaveFile("Text.txt", std::ios::out | std::ios::app);
-
+        dll.saveFile();
+        
     }
 
     void insert(int index, string text) {
@@ -51,21 +51,28 @@ public:
         else {
             dll.addToBetween(index,text); //Eðer ki kullanýcý index row'unu seçerse bu index row'una bu text eklenir.
         }
+        cout<< dll << endl;
     }
 
     void del(int index) {
-        if (dll.isEmpty())
+       if (dll.isEmpty())
         {
             cout<<"You cannot do that action. Please close the program.";
         }
         else {
+            dll.deletetoSelectedNode(index); //Kullanýcýnýn girdiði index deðeri (row sayýsý) silinir.
+            cout << dll << endl;
             
         }
     }
-    void move() {
-    }
+    //void move() {
+      //  dll.MoveNode(*linen,*linem);
 
-    void replace() {
+   // }
+
+    void replace(int index, string text) {
+       dll.ReplaceNode(index, text);
+       cout << dll << endl;
     }
 
     void next() {
@@ -77,10 +84,6 @@ public:
     void undo() {
 
     }
-
-
-
-
 };
 
 
@@ -113,21 +116,45 @@ int main(void)
         if (command == 1)
         {
             termproject.openfilename("Text.txt");
+            cout << "The file successfully opened." << endl;
         }
         if (command == 2)
         {
             termproject.savefilename();
+            cout << "The file successfully saved." << endl;
         }
         if (command == 3)
         {
-            cout << "Where do you want to insert your text? Type a number." << endl;
+            cout << "Where do you want to insert your text? Type a line number." << endl;
             cin >> index;
-            cout << "What do you want to insert? Write your text." << endl;
-            cin >> text; 
+            cout << "What do you want to insert that row? Write your text." << endl;
+            cin >> text;
             termproject.insert(index, text);
-
+            cout << "The text successfully inserted." << endl;
         }
-       
-    }
-    while (true);
+        if (command == 4)
+      {
+            cout << "Which do you want to delete your text? Type a line number." << endl;
+            cin >> index;
+            termproject.del(index);
+            cout << "The line successfully deleted." << endl;
+       }
+        //if (command == 5)
+        //{
+          //  cout << "Enter your first line:" << endl;
+           // cin >> ;
+           // cout << "Enter your second line:" << endl;
+          //  cin >> ;
+          //  termproject.move();
+        //}
+       if (command == 6)
+       {
+           cout << "Enter a line number that you want to change the text of it." << endl;
+           cin >>index;
+           cout << "Enter your new text:" << endl;
+           cin >>text;
+           termproject.replace(index, text);
+           cout << "You have successfully changed the line text." << endl;
+        }
+    } while (true);
 }

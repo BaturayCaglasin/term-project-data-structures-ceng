@@ -46,8 +46,12 @@ public:
     {
         head = tail = 0;
     }
+    
     void addToDLLHead(const T&);
-    void addToBetween(int,const T&);
+    void addToBetween(int, const T&);
+    void deletetoSelectedNode(int index);
+    void ReplaceNode(int, const T&);
+    void saveFile();
     T deleteFromDLLHead();
     T& firstEl();
     T* find(const T&) const;
@@ -83,26 +87,152 @@ void DoublyLinkedList<T>::addToDLLTail(const T& el)
     }
     else head = tail = new DLLNode<T>(el);
 }
+//*******************************************************************************//
+template<class T>
+void DoublyLinkedList<T>::saveFile() {
+   
+    ofstream file;
+    file.open("Text.txt", ios::out | ios::app | ios::binary);
+    DLLNode<T>* temp;
+    temp = head;
+    if (!file) {
+        cout << "Couldn't open the file";
+    }
+    else {
+        while (temp != NULL)
+        {
+            file << temp->info;
+                temp = temp->next;
+        }
+    }
+
+}
 
 //*******************************************************************************//
 template<class T>
-void DoublyLinkedList<T>::addToBetween(int index,const T& el)
+void DoublyLinkedList<T>::addToBetween(int index, const T& el)
 {
-    DLLNode<T>** newptr = new DLLNode<T>;
-    int size = 0;
-    newptr->info = el;
-    if (index < 1 || index > size + 1){
-        cout << "Invalid position." << endl;
+    int i;
+    DLLNode<T>* temp;
+
+    if (head == NULL)
+    {
+        cout<<("List is empty. You cannot do that action.\n")<<endl;
     }
-    else {
-        *prev = find(index - 1);
-        newptr->next = prev->next;
-        prev->next = newptr;
+    else
+    {
+        temp = head;
+        i = 1;
+
+        while (i < index - 1 && temp != NULL)
+        {
+            temp = temp->next;
+            i++;
+        }
+
+        if (index == 1)
+        {
+            addToDLLHead(el);
+        }
+        else if (temp == tail)
+        {
+            addToDLLTail(el);
+        }
+        
+        else if (temp != NULL)
+        {
+            DLLNode<T>* newptr = new DLLNode<T>();
+            newptr->info = el;
+            newptr->next = temp->next;
+            newptr->prev = temp;
+
+            if (temp->next != NULL)
+            {
+
+                temp->next->prev = newptr;
+            }
+
+            temp->next = newptr;
+
+            cout << ("Node inserted successfully.\n", index) << endl;
+        }
+        else
+        {
+            cout << ("Error, Invalid position.\n") << endl;
+        }
     }
 }
 //*******************************************************************************//
 template<class T>
-T DoublyLinkedList<T>::get_size(){
+void DoublyLinkedList<T>::deletetoSelectedNode(int index)
+{
+    int i;
+    DLLNode<T>* temp;
+    if (head == NULL)
+    {
+        printf("List is empty. You cannot do that action.\n");
+    }
+    else
+    {
+        temp = head;
+        i = 1;
+      
+        while (i < index && temp != NULL)
+        {
+            temp = temp->next;
+            i++;
+        } 
+
+        if (index == 1)
+        {
+            deleteFromDLLHead();
+        }
+        else if (temp == tail)
+        {
+            deleteFromDLLTail();
+        }
+        else if (temp != NULL)
+        {
+            temp->prev->next = temp->next;
+            temp->next->prev = temp->prev;
+            free(temp); // Delete the n node
+        }
+        else
+        {
+            cout << ("Invalid Position") << endl;
+        }
+    }
+}
+//*******************************************************************************//
+
+
+template <typename T>
+void DoublyLinkedList<T>::ReplaceNode(int index, const T& el) {
+
+    int i;
+    DLLNode<T>* temp;
+
+    if (head == NULL)
+    {
+        printf("List is empty. You cannot do that action.\n");
+    }
+    else
+    {
+        temp = head;
+        i = 1;
+
+        while (i < index && temp != NULL)
+        {
+            temp = temp->next;
+            i++;
+        }
+        temp->info = el;
+        return;
+    }
+}
+//*******************************************************************************//
+template<class T>
+T DoublyLinkedList<T>::get_size() {
     int size = 0;
     for (DLLNode* tmp = head; tmp != 0; tmp = tmp->next)
         size++;
