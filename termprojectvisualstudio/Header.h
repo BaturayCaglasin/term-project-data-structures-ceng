@@ -52,6 +52,8 @@ public:
     void deletetoSelectedNode(int index);
     void ReplaceNode(int, const T&);
     void MoveNode(int indexn,int indexm);
+    void next();
+    void prev();
     void saveFile();
     T deleteFromDLLHead();
     T& firstEl();
@@ -172,7 +174,6 @@ void DoublyLinkedList<T>::MoveNode(int indexn, int indexm) {
     DLLNode<T>* temp;
     DLLNode<T>* deleted;
 
-    deleted = NULL;
 
     if (head == NULL)
     {
@@ -181,24 +182,26 @@ void DoublyLinkedList<T>::MoveNode(int indexn, int indexm) {
     else
     {
         temp = head;
+        deleted = head;
         i = 1;
 
         while (i < indexn && temp != NULL)
         {
             temp = temp->next;
-            i++;
+            i++;  
         }
-
+        
         if (temp != NULL)
         {
             temp->prev->next = temp->next;
             temp->next->prev = temp->prev;
-            temp = deleted;
+            temp == deleted;
             free(temp); // Delete the indexn's node
         }
+       
         //n node'u silindi; temp=n'i tutuyordu. temp n i tutmaya devam edecek m e insert selected node yapacak which is m
 
-        while (i < indexm - 1 && deleted != NULL)
+        while (i < indexm && deleted != NULL)
         {
             deleted = deleted->next;
             i++;
@@ -206,7 +209,7 @@ void DoublyLinkedList<T>::MoveNode(int indexn, int indexm) {
          if (deleted != NULL)
         {
              DLLNode<T>* newptr = new DLLNode<T>();
-             //newptr->info = el;
+             newptr->info = deleted->info;
              newptr->next = deleted->next;
              newptr->prev = deleted;
 
@@ -217,6 +220,7 @@ void DoublyLinkedList<T>::MoveNode(int indexn, int indexm) {
             }
 
             deleted->next = newptr;
+            
 
             cout << ("The node moved from position n to position m successfully.\n") << endl;
         }
@@ -264,7 +268,45 @@ void DoublyLinkedList<T>::deletetoSelectedNode(int index)
     }
 }
 //*******************************************************************************//
+template<class T>
+void DoublyLinkedList<T>::next()
+{
 
+    int index=0;
+    int i=0;
+   // int count = 0;
+    DLLNode<T>* temp;
+ 
+    temp = head;
+       
+        if (index >= 0 && temp != NULL)
+        {
+            for (i = 0; i <= index; i++)
+            {
+                temp = temp->next;
+                cout << temp->info << endl;
+                index++;
+
+                if (index == 10)
+                {
+                    cout << temp->info << endl;
+                    cout << "***Page-2***" << endl;
+                    index = 0;
+                }
+
+            }
+        }
+    
+}
+//*******************************************************************************//
+//*******************************************************************************//
+
+template<class T>
+void DoublyLinkedList<T>::prev()
+{
+
+}
+//*******************************************************************************//
 
 template <typename T>
 void DoublyLinkedList<T>::ReplaceNode(int index, const T& el) {

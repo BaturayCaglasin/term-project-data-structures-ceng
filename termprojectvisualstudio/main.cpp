@@ -6,6 +6,8 @@
 
 //sorular:
 //save file'da file içindekileri duplicate etmesi.
+//move'da temp pointer'ýný delete pointer'ýna eþitleyip temp pointer'ýný uçurmak
+//next'te son iki node'u duplicate'lemesi
 
 using namespace std;
 class termproject
@@ -79,6 +81,7 @@ public:
     }
 
     void next() {
+        dll.next();
 
     }
     void prev() {
@@ -163,6 +166,13 @@ int main(void)
            termproject.replace(index, text);
            cout << "You have successfully changed the line text." << endl;
         }
+       if (command == 7)
+       {
+           termproject.next();
+       }
+
+
+
 
        if (command == 0)
        {
