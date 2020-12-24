@@ -51,6 +51,7 @@ public:
     void addToBetween(int, const T&);
     void deletetoSelectedNode(int index);
     void ReplaceNode(int, const T&);
+    void MoveNode(int indexn,int indexm);
     void saveFile();
     T deleteFromDLLHead();
     T& firstEl();
@@ -101,7 +102,7 @@ void DoublyLinkedList<T>::saveFile() {
     else {
         while (temp != NULL)
         {
-            file << temp->info;
+            file << temp->info +"\n";
                 temp = temp->next;
         }
     }
@@ -159,6 +160,65 @@ void DoublyLinkedList<T>::addToBetween(int index, const T& el)
         else
         {
             cout << ("Error, Invalid position.\n") << endl;
+        }
+    }
+}
+//*******************************************************************************//
+
+template <typename T>
+void DoublyLinkedList<T>::MoveNode(int indexn, int indexm) {
+
+    int i;
+    DLLNode<T>* temp;
+    DLLNode<T>* deleted;
+
+    deleted = NULL;
+
+    if (head == NULL)
+    {
+        printf("List is empty. You cannot do that action.\n");
+    }
+    else
+    {
+        temp = head;
+        i = 1;
+
+        while (i < indexn && temp != NULL)
+        {
+            temp = temp->next;
+            i++;
+        }
+
+        if (temp != NULL)
+        {
+            temp->prev->next = temp->next;
+            temp->next->prev = temp->prev;
+            temp = deleted;
+            free(temp); // Delete the indexn's node
+        }
+        //n node'u silindi; temp=n'i tutuyordu. temp n i tutmaya devam edecek m e insert selected node yapacak which is m
+
+        while (i < indexm - 1 && deleted != NULL)
+        {
+            deleted = deleted->next;
+            i++;
+        }
+         if (deleted != NULL)
+        {
+             DLLNode<T>* newptr = new DLLNode<T>();
+             //newptr->info = el;
+             newptr->next = deleted->next;
+             newptr->prev = deleted;
+
+            if (deleted->next != NULL)
+            {
+
+                deleted->next->prev = newptr;
+            }
+
+            deleted->next = newptr;
+
+            cout << ("The node moved from position n to position m successfully.\n") << endl;
         }
     }
 }

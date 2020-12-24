@@ -4,6 +4,8 @@
 #include <stack>
 #include "Header.h"
 
+//sorular:
+//save file'da file içindekileri duplicate etmesi.
 
 using namespace std;
 class termproject
@@ -65,10 +67,11 @@ public:
             
         }
     }
-    //void move() {
-      //  dll.MoveNode(*linen,*linem);
+   void move(int indexn, int indexm) {
+       dll.MoveNode(indexn, indexm);
+       cout << dll << endl;
 
-   // }
+   }
 
     void replace(int index, string text) {
        dll.ReplaceNode(index, text);
@@ -94,11 +97,13 @@ int main(void)
     string text;
     int command;
     int index;
+    int indexn;
+    int indexm;
     do {
         cout << "********************************************************\n";
         cout << "Written By: Baturay Caglasin\n";
         cout << "********************************************************\n";
-        cout << "Welcome to the project. Please type your command: :\n";
+        cout << "Welcome to the project. Please type your command:\n";
         cout << "********************************************************\n";
         cout << " 1-Open your file \n";
         cout << " 2.Save your file \n";
@@ -109,6 +114,7 @@ int main(void)
         cout << " 7-Next Operation \n";
         cout << " 8-Prev Operation \n";
         cout << " 9-Undo Operation" << endl;
+        cout << " Press '0' button to exit" << endl;
 
 
         cin >> command;
@@ -139,14 +145,15 @@ int main(void)
             termproject.del(index);
             cout << "The line successfully deleted." << endl;
        }
-        //if (command == 5)
-        //{
-          //  cout << "Enter your first line:" << endl;
-           // cin >> ;
-           // cout << "Enter your second line:" << endl;
-          //  cin >> ;
-          //  termproject.move();
-        //}
+        if (command == 5)
+        {
+            cout << "Enter your first line:" << endl;
+            cin >>indexn ;
+            cout << "Enter your second line:" << endl;
+           cin >>indexm;
+           termproject.move(indexn,indexm);
+           cout << "The line moved from position n to position m successfully." << endl;
+        }
        if (command == 6)
        {
            cout << "Enter a line number that you want to change the text of it." << endl;
@@ -156,5 +163,10 @@ int main(void)
            termproject.replace(index, text);
            cout << "You have successfully changed the line text." << endl;
         }
+
+       if (command == 0)
+       {
+           exit (0);
+       }
     } while (true);
 }
