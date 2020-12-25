@@ -54,7 +54,7 @@ public:
     void MoveNode(int indexn,int indexm);
     void next();
     void prev();
-    void saveFile();
+    void saveFile(string);
     T deleteFromDLLHead();
     T& firstEl();
     T* find(const T&) const;
@@ -92,10 +92,10 @@ void DoublyLinkedList<T>::addToDLLTail(const T& el)
 }
 //*******************************************************************************//
 template<class T>
-void DoublyLinkedList<T>::saveFile() {
+void DoublyLinkedList<T>::saveFile(string filename) {
    
     ofstream file;
-    file.open("Text.txt", ios::out | ios::app | ios::binary);
+    file.open(filename.c_str());
     DLLNode<T>* temp;
     temp = head;
     if (!file) {
@@ -172,9 +172,10 @@ void DoublyLinkedList<T>::MoveNode(int indexn, int indexm) {
 
     int i;
     DLLNode<T>* temp;
-    DLLNode<T>* deleted;
-
-
+    DLLNode<T>* iter;
+    T el;
+ 
+    //Deletion
     if (head == NULL)
     {
         printf("List is empty. You cannot do that action.\n");
@@ -182,7 +183,7 @@ void DoublyLinkedList<T>::MoveNode(int indexn, int indexm) {
     else
     {
         temp = head;
-        deleted = head;
+        iter = head;
         i = 1;
 
         while (i < indexn && temp != NULL)
@@ -195,33 +196,30 @@ void DoublyLinkedList<T>::MoveNode(int indexn, int indexm) {
         {
             temp->prev->next = temp->next;
             temp->next->prev = temp->prev;
-            temp == deleted;
-            free(temp); // Delete the indexn's node
+            el=temp->info;
+            free(temp);
         }
-       
-        //n node'u silindi; temp=n'i tutuyordu. temp n i tutmaya devam edecek m e insert selected node yapacak which is m
-
-        while (i < indexm && deleted != NULL)
+        //Insertion
+        while (i < indexm-1 && iter != NULL)
         {
-            deleted = deleted->next;
+            iter = iter->next;
             i++;
         }
-         if (deleted != NULL)
+         if (iter != NULL)
         {
              DLLNode<T>* newptr = new DLLNode<T>();
-             newptr->info = deleted->info;
-             newptr->next = deleted->next;
-             newptr->prev = deleted;
+             newptr->info = el;
+             newptr->next = iter->next;
+             newptr->prev = iter;
 
-            if (deleted->next != NULL)
+            if (iter->next != NULL)
             {
 
-                deleted->next->prev = newptr;
+                iter->next->prev = newptr;
             }
 
-            deleted->next = newptr;
+            iter->next = newptr;
             
-
             cout << ("The node moved from position n to position m successfully.\n") << endl;
         }
     }
@@ -289,8 +287,8 @@ void DoublyLinkedList<T>::next()
 
                 if (index == 10)
                 {
-                    cout << temp->info << endl;
-                    cout << "***Page-2***" << endl;
+                    //cout << temp->info << endl;
+                    cout << "***Page-"<<index<<"***"<< endl;
                     index = 0;
                 }
 

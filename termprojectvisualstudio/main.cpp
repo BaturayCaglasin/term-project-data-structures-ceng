@@ -4,10 +4,8 @@
 #include <stack>
 #include "Header.h"
 
-//sorular:
-//save file'da file içindekileri duplicate etmesi.
-//move'da temp pointer'ýný delete pointer'ýna eþitleyip temp pointer'ýný uçurmak
-//next'te son iki node'u duplicate'lemesi
+//sorular
+//next'te son iki node'u duplicate'lemesi, ilk node'u almamasý
 
 using namespace std;
 class termproject
@@ -38,8 +36,8 @@ public:
 
         }
     }
-    void savefilename() {
-        dll.saveFile();
+    void savefilename(string filename) {
+        dll.saveFile(filename);
         
     }
 
@@ -129,7 +127,7 @@ int main(void)
         }
         if (command == 2)
         {
-            termproject.savefilename();
+            termproject.savefilename("Text.txt");
             cout << "The file successfully saved." << endl;
         }
         if (command == 3)
