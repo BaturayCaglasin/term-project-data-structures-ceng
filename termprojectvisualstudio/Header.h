@@ -270,33 +270,39 @@ template<class T>
 void DoublyLinkedList<T>::next()
 {
 
-    int index=0;
+    int count = 0;
     int i=0;
-   // int count = 0;
+    int size = 0;
+    int index = 0;
     DLLNode<T>* temp;
- 
     temp = head;
-       
-        if (index >= 0 && temp != NULL)
+
+    for (temp = head; temp != 0; temp = temp->next) {
+        size++;
+
+        for (i = 1; i <= size; i++)
         {
-            for (i = 0; i <= index; i++)
+            temp = temp->next; 
+            count++;
+            cout << temp->info << endl;
+
+            if (count == 10)
             {
-                temp = temp->next;
-                cout << temp->info << endl;
+                index++;   
+                cout << "***Page-" << index << "***" << endl;
+
+            }   
+            else if (count==11&&count == 20)
+            {
                 index++;
-
-                if (index == 10)
-                {
-                    //cout << temp->info << endl;
-                    cout << "***Page-"<<index<<"***"<< endl;
-                    index = 0;
-                }
-
+                cout << "***Page-" << index << "***" << endl;
             }
+       
         }
+    }
     
 }
-//*******************************************************************************//
+
 //*******************************************************************************//
 
 template<class T>
