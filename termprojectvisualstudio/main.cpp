@@ -4,8 +4,6 @@
 #include <stack>
 #include "Header.h"
 
-//sorular
-//next'te son iki node'u duplicate'lemesi, ilk node'u almamasý
 
 using namespace std;
 class termproject
@@ -16,7 +14,6 @@ public:
     DoublyLinkedList <string> dll;
     DLLNode <string> DLLNode;
     int arraysize;
-
 
     void openfilename(string filename) {
 
@@ -29,13 +26,14 @@ public:
             cout << "Couldn't open the file" << endl;
             return;
         }
-  
+
         while (getline(file, line)) {
-            cout << line <<endl;
+            cout << line << endl;
             dll.addToDLLTail(line);
 
         }
     }
+    
     void savefilename(string filename) {
         dll.saveFile(filename);
         
@@ -45,13 +43,13 @@ public:
 
         if (dll.isEmpty()) 
         {
-            dll.addToDLLHead(text); //Corner case: eðer text dosyasý boþ ise ilk row'a bu text'i ekleyecek.
+            dll.addToDLLHead(text); 
         }
         if (index == 1) {
-            dll.addToDLLHead(text); //Corner case: eðer ki kullanýcý ilk row'u seçmiþse bu text head'e eklensin.
+            dll.addToDLLHead(text); 
         }
         else {
-            dll.addToBetween(index,text); //Eðer ki kullanýcý index row'unu seçerse bu index row'una bu text eklenir.
+            dll.addToBetween(index,text); 
         }
         cout<< dll << endl;
     }
@@ -79,9 +77,9 @@ public:
     }
 
     void next() {
-        dll.next();
-
+        
     }
+
     void prev() {
     }
 

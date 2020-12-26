@@ -117,15 +117,25 @@ void DoublyLinkedList<T>::addToBetween(int index, const T& el)
 {
     int i;
     DLLNode<T>* temp;
+    DLLNode<T>* newNode=new DLLNode<T>;
 
     if (head == NULL)
     {
         cout<<("List is empty. You cannot do that action.\n")<<endl;
     }
+
+   
     else
     {
         temp = head;
         i = 1;
+
+        if (temp == NULL)
+        {
+        for (temp->next == NULL; (index-1) > 0; index--) {
+            newNode->info == " ";
+        }
+          }
 
         while (i < index - 1 && temp != NULL)
         {
@@ -137,6 +147,8 @@ void DoublyLinkedList<T>::addToBetween(int index, const T& el)
         {
             addToDLLHead(el);
         }
+
+
         else if (temp == tail)
         {
             addToDLLTail(el);
@@ -257,7 +269,7 @@ void DoublyLinkedList<T>::deletetoSelectedNode(int index)
         {
             temp->prev->next = temp->next;
             temp->next->prev = temp->prev;
-            free(temp); // Delete the n node
+            free(temp); 
         }
         else
         {
@@ -270,36 +282,7 @@ template<class T>
 void DoublyLinkedList<T>::next()
 {
 
-    int count = 0;
-    int i=0;
-    int size = 0;
-    int index = 0;
-    DLLNode<T>* temp;
-    temp = head;
-
-    for (temp = head; temp != 0; temp = temp->next) {
-        size++;
-
-        for (i = 1; i <= size; i++)
-        {
-            temp = temp->next; 
-            count++;
-            cout << temp->info << endl;
-
-            if (count == 10)
-            {
-                index++;   
-                cout << "***Page-" << index << "***" << endl;
-
-            }   
-            else if (count==11&&count == 20)
-            {
-                index++;
-                cout << "***Page-" << index << "***" << endl;
-            }
-       
-        }
-    }
+    
     
 }
 
