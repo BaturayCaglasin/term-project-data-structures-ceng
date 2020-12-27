@@ -41,6 +41,15 @@ public:
     {
         return head == 0;
     }
+    int getSize() {
+        int length = 0;
+        DLLNode<T>* temp = head;
+        while (temp != NULL) {
+            temp = temp->next;
+            length++;
+        }
+        return length;
+    }
     void clear();
     void setToNull()
     {
@@ -59,7 +68,7 @@ public:
     T& firstEl();
     T* find(const T&) const;
     T findnode(int index) const;
-    T  get_size();
+
 protected:
     DLLNode<T>* head, * tail;
     friend ostream& operator<<(ostream& out, const DoublyLinkedList<T>& dll)
@@ -279,22 +288,7 @@ void DoublyLinkedList<T>::deletetoSelectedNode(int index)
     }
 }
 //*******************************************************************************//
-template<class T>
-void DoublyLinkedList<T>::next()
-{
 
-    
-    
-}
-
-//*******************************************************************************//
-
-template<class T>
-void DoublyLinkedList<T>::prev()
-{
-
-}
-//*******************************************************************************//
 
 template <typename T>
 void DoublyLinkedList<T>::ReplaceNode(int index, const T& el) {
@@ -321,14 +315,7 @@ void DoublyLinkedList<T>::ReplaceNode(int index, const T& el) {
     }
 }
 //*******************************************************************************//
-template<class T>
-T DoublyLinkedList<T>::get_size() {
-    int size = 0;
-    for (DLLNode* tmp = head; tmp != 0; tmp = tmp->next)
-        size++;
 
-    return size;
-}
 template<class T>
 T DoublyLinkedList<T>::deleteFromDLLHead()
 {
@@ -383,6 +370,7 @@ T DoublyLinkedList<T>::findnode(int index) const
     }
 
 //*******************************************************************************//
+
 
 template <class T>
 T* DoublyLinkedList<T>::find(const T& el) const

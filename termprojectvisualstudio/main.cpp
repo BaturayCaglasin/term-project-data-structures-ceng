@@ -13,15 +13,19 @@ public:
 
     DoublyLinkedList <string> dll;
     DLLNode <string> DLLNode;
-    int count=0;
+    int pagelimit = 10;
     int arraysize;
     string line;
     ifstream file;
-    
+    int countremainlines;
+    int pagecount=1;
+    int i = 1;
+    int z;
+
 
     void openfilename(string filename) {
 
-       
+
         file.open(filename.c_str());
 
         if (file.is_open() == false)
@@ -34,71 +38,85 @@ public:
             {
                 dll.addToDLLTail(line);
             }
-            for (int i = 1; i <= 10; i++) {
+
+            for (i = 1; i <= dll.getSize(); i++) {
                 line = dll.findnode(i);
-                cout << line << endl;            
+                if (i < pagelimit + 1) {
+                    cout << line << endl;
+                }   
             }
-            count++;
-            cout << "---" << "Page" << count << "---" << endl;
+            z =+ 11;
+            cout << z << endl;
+            countremainlines = (dll.getSize() - pagelimit);
+            cout << "---" << "Page-"<<pagecount << "---" << endl;
         }
     }
-    
+
     void savefilename(string filename) {
         dll.saveFile(filename);
-        
+
     }
 
     void insert(int index, string text) {
 
-        if (dll.isEmpty()) 
+        if (dll.isEmpty())
         {
-            dll.addToDLLHead(text); 
+            dll.addToDLLHead(text);
         }
         if (index == 1) {
-            dll.addToDLLHead(text); 
+            dll.addToDLLHead(text);
         }
         else {
-            dll.addToBetween(index,text); 
+            dll.addToBetween(index, text);
         }
-        cout<< dll << endl;
+        cout << dll << endl;
     }
 
     void del(int index) {
-       if (dll.isEmpty())
+        if (dll.isEmpty())
         {
-            cout<<"You cannot do that action. Please close the program.";
+            cout << "You cannot do that action. Please close the program.";
         }
         else {
-            dll.deletetoSelectedNode(index); 
+            dll.deletetoSelectedNode(index);
             cout << dll << endl;
-            
+
         }
     }
-   void move(int indexn, int indexm) {
-       dll.MoveNode(indexn, indexm);
-       cout << dll << endl;
+    void move(int indexn, int indexm) {
+        dll.MoveNode(indexn, indexm);
+        cout << dll << endl;
 
-   }
+    }
 
     void replace(int index, string text) {
-       dll.ReplaceNode(index, text);
-       cout << dll << endl;
+        dll.ReplaceNode(index, text);
+        cout << dll << endl;
     }
 
     void next() {
 
         void openfilename(string filename);
+        pagecount++;
 
-        for (int i = 11; i <= 20; i++) {
-            line = dll.findnode(i);
-            cout << line << endl;
-        }
-        count++;
-        cout << "---" << "Page" << count << "---" << endl;
+        for (z; z <= dll.getSize(); z++) {
+             cout << line << endl;    
+            }    
+        z = +10;
+        cout << "---" << "Page-"<< pagecount << "---" << endl;
     }
-     
-
+       
     void prev() {
+        void openfilename(string filename);
+        pagecount--;
+        z = -10;
+
+        for (z; z <= countremainlines; z--) {
+            if (z < pagelimit + 1) {
+                cout << line << endl;
+            }
+        }
+        cout << "---" << "Page-" << pagecount << "---" << endl;
     }
 
     void undo() {
@@ -184,10 +202,10 @@ int main(void)
        {
            termproject.next();
        }
-
-
-
-
+       if (command == 9)
+       {
+           termproject.prev();
+       }
        if (command == 0)
        {
            exit (0);
