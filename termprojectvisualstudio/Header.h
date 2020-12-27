@@ -58,6 +58,7 @@ public:
     T deleteFromDLLHead();
     T& firstEl();
     T* find(const T&) const;
+    T findnode(int index) const;
     T  get_size();
 protected:
     DLLNode<T>* head, * tail;
@@ -363,6 +364,25 @@ T DoublyLinkedList<T>::deleteFromDLLTail()
     }
     return el;
 }
+//*******************************************************************************//
+template <class T>
+T DoublyLinkedList<T>::findnode(int index) const
+{
+    DLLNode<T>* temp;
+
+    temp = head;
+  
+    int count = 1;
+    while (temp != NULL)
+    {
+        if (count == index)
+            return(temp->info);
+        count++;
+        temp = temp->next;
+    }
+    }
+
+//*******************************************************************************//
 
 template <class T>
 T* DoublyLinkedList<T>::find(const T& el) const

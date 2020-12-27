@@ -14,6 +14,7 @@ public:
     DoublyLinkedList <string> dll;
     DLLNode <string> DLLNode;
     int arraysize;
+    
 
     void openfilename(string filename) {
 
@@ -26,11 +27,15 @@ public:
             cout << "Couldn't open the file" << endl;
             return;
         }
-
-        while (getline(file, line)) {
-            cout << line << endl;
-            dll.addToDLLTail(line);
-
+        else {
+            while (getline(file, line))
+            {
+                dll.addToDLLTail(line);
+            }
+            for (int i = 1; i <= 10; i++) {
+                line = dll.findnode(i);
+                cout << line << endl;
+            }
         }
     }
     

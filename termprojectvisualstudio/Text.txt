@@ -8,5 +8,5 @@
 8.) LineH
 9.) LineI
 10.) LineJ
-11.)ada
-12.)batu
+11.) LineK
+
