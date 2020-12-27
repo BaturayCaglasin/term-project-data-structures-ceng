@@ -61,8 +61,6 @@ public:
     void deletetoSelectedNode(int index);
     void ReplaceNode(int, const T&);
     void MoveNode(int indexn,int indexm);
-    void next();
-    void prev();
     void saveFile(string);
     T deleteFromDLLHead();
     T& firstEl();

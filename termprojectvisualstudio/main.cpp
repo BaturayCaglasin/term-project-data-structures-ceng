@@ -3,7 +3,7 @@
 #include <string>
 #include <stack>
 #include "Header.h"
-
+#include "stackcpp.cpp"
 
 using namespace std;
 class termproject
@@ -13,6 +13,7 @@ public:
 
     DoublyLinkedList <string> dll;
     DLLNode <string> DLLNode;
+    mystack<string> mystack;
     int pagelimit = 10;
     int arraysize;
     string line;
@@ -70,7 +71,13 @@ public:
             dll.addToBetween(index, text);
         }
         cout << dll << endl;
+        mystack.push();
+        //Burada kaldýn.
+        
     }
+   
+    
+        
 
     void del(int index) {
         if (dll.isEmpty())
@@ -121,7 +128,10 @@ public:
 
     void undo() {
 
+
+
     }
+
 };
 
 
