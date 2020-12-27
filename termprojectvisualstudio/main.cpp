@@ -13,13 +13,15 @@ public:
 
     DoublyLinkedList <string> dll;
     DLLNode <string> DLLNode;
+    int count=0;
     int arraysize;
+    string line;
+    ifstream file;
     
 
     void openfilename(string filename) {
 
-        string line;
-        ifstream file;
+       
         file.open(filename.c_str());
 
         if (file.is_open() == false)
@@ -34,8 +36,10 @@ public:
             }
             for (int i = 1; i <= 10; i++) {
                 line = dll.findnode(i);
-                cout << line << endl;
+                cout << line << endl;            
             }
+            count++;
+            cout << "---" << "Page" << count << "---" << endl;
         }
     }
     
@@ -65,7 +69,7 @@ public:
             cout<<"You cannot do that action. Please close the program.";
         }
         else {
-            dll.deletetoSelectedNode(index); //Kullanýcýnýn girdiði index deðeri (row sayýsý) silinir.
+            dll.deletetoSelectedNode(index); 
             cout << dll << endl;
             
         }
@@ -82,8 +86,17 @@ public:
     }
 
     void next() {
-        
+
+        void openfilename(string filename);
+
+        for (int i = 11; i <= 20; i++) {
+            line = dll.findnode(i);
+            cout << line << endl;
+        }
+        count++;
+        cout << "---" << "Page" << count << "---" << endl;
     }
+     
 
     void prev() {
     }
