@@ -106,6 +106,7 @@ public:
 
 
         void openfilename(string filename);
+
         i = p * 10;
         for (i; i<= linelength;i++){
             line = dll.findnode(i);
@@ -114,26 +115,29 @@ public:
             cout << line << endl;
             }
         }
-
-        cout << "---" << "Page-" << pagecount << "---" << endl;
         p++;
+        cout << "---" << "Page-" << p << "---" << endl;
+      
+
     }
     
        
     void prev() {
+
         void openfilename(string filename);
-        pagecount--;
-        z -= 11;
-        cout << z << endl;
-      
+        p--;
 
-        for (z; z <= dll.getSize(); z++) {
-            line = dll.findnode(z);
-            cout << line << endl;
+        i = p * 10;
+        for (i; i <= linelength; i++) {
+            line = dll.findnode(i);
+
+            if (i >= (p * 10) - 10) {
+                cout << line << endl;
+            }
         }
-        cout << "---" << "Page-" << pagecount << "---" << endl;
-    }
+        cout << "---" << "Page-" << p << "---" << endl;
 
+    }
     void undo() {
 
 
