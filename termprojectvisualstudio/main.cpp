@@ -47,7 +47,7 @@ public:
                 }   
             }
             z =+ 11;
-            cout << z << endl;
+            //cout << z << endl;
             countremainlines = (dll.getSize() - pagelimit);
             cout << "---" << "Page-"<<pagecount << "---" << endl;
         }
@@ -107,6 +107,7 @@ public:
         pagecount++;
 
         for (z; z <= dll.getSize(); z++) {
+            line = dll.findnode(z);
              cout << line << endl;    
             }    
         z = +10;

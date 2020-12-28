@@ -8,7 +8,7 @@
 8.) LineH
 9.) LineI
 10.) LineJ
-11.)batu
-12.)ada
-13.)doga
-14.)yeditepe
+11.)Line11 
+12.)Line12 
+13.)Line13 
+14.)Line14 
