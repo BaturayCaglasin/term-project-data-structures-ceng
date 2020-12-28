@@ -19,8 +19,8 @@ public:
 		length =dll.getSize();
 		
 	}
-
-	void push() {
+	
+	void push(T value) {
 	
 	}
 	int top() {

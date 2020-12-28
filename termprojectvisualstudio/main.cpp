@@ -22,9 +22,12 @@ public:
     int pagecount=1;
     int i = 1;
     int z;
+    int linelength;
+    int p = pagecount;
 
 
     void openfilename(string filename) {
+       
 
 
         file.open(filename.c_str());
@@ -39,18 +42,21 @@ public:
             {
                 dll.addToDLLTail(line);
             }
+            linelength = dll.getSize();
 
-            for (i = 1; i <= dll.getSize(); i++) {
+            for (i = 1; i <= linelength; i++) {
                 line = dll.findnode(i);
+               
                 if (i < pagelimit + 1) {
                     cout << line << endl;
                 }   
             }
-            z =+ 11;
-            //cout << z << endl;
+
             countremainlines = (dll.getSize() - pagelimit);
             cout << "---" << "Page-"<<pagecount << "---" << endl;
         }
+        pagecount++;
+        z += 10;
     }
 
     void savefilename(string filename) {
@@ -71,13 +77,8 @@ public:
             dll.addToBetween(index, text);
         }
         cout << dll << endl;
-        mystack.push();
-        //Burada kaldýn.
         
-    }
-   
-    
-        
+    }      
 
     void del(int index) {
         if (dll.isEmpty())
@@ -103,26 +104,32 @@ public:
 
     void next() {
 
-        void openfilename(string filename);
-        pagecount++;
 
-        for (z; z <= dll.getSize(); z++) {
-            line = dll.findnode(z);
-             cout << line << endl;    
-            }    
-        z = +10;
-        cout << "---" << "Page-"<< pagecount << "---" << endl;
+        void openfilename(string filename);
+        i = p * 10;
+        for (i; i<= linelength;i++){
+            line = dll.findnode(i);
+
+            if(i<=(p*10)+10){
+            cout << line << endl;
+            }
+        }
+
+        cout << "---" << "Page-" << pagecount << "---" << endl;
+        p++;
     }
+    
        
     void prev() {
         void openfilename(string filename);
         pagecount--;
-        z = -10;
+        z -= 11;
+        cout << z << endl;
+      
 
-        for (z; z <= countremainlines; z--) {
-            if (z < pagelimit + 1) {
-                cout << line << endl;
-            }
+        for (z; z <= dll.getSize(); z++) {
+            line = dll.findnode(z);
+            cout << line << endl;
         }
         cout << "---" << "Page-" << pagecount << "---" << endl;
     }
@@ -131,6 +138,45 @@ public:
 
 
 
+    }
+
+};
+
+template<class T>
+class mymainstack
+{
+public:
+    DoublyLinkedList <string> dll;
+    DLLNode <string> DLLNode;
+    mystack<string> mystack;
+
+    string line;
+    ifstream file;
+    int length;
+
+    mymainstack()
+    {
+        length = dll.getSize();
+
+    }
+
+    void push(T value) {
+
+    }
+    int top() {
+        return dll.firstEl();
+    }
+    int pop()
+    {
+        length--;
+        return dll.deleteFromDLLHead();
+    }
+
+    int getSize() {
+        return length;
+    }
+    void print() {
+        length.printAll();
     }
 
 };
@@ -212,10 +258,19 @@ int main(void)
        if (command == 7)
        {
            termproject.next();
+           cout << "You have successfully changed to your page." << endl;
+       }
+       if (command == 8)
+       {
+           termproject.prev();
+           cout << "You have successfully changed to your page." << endl;
+
        }
        if (command == 9)
        {
-           termproject.prev();
+           termproject.undo();
+           cout << "Undo operation was successfully." << endl;
+
        }
        if (command == 0)
        {
