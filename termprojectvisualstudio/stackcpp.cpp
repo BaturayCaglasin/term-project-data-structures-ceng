@@ -20,13 +20,15 @@ public:
 		
 	}
 	
-	void push(T value) {
-	
+	string push(string value) {
+		dll.addToDLLHead(value);
+		return 0;
 	}
-	int top() {
+
+	string top() {
 		return dll.firstEl();
 	}
-	int pop()
+	string pop()
 	{
 		length--;
 		return dll.deleteFromDLLHead();
